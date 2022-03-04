@@ -94,18 +94,25 @@ contract NiftyOnchainMetadata is ERC721("zkNifty", "ZKNFT"), MerkleProof {
     * @dev Adds a leaf to the Merkle Tree
     */
     function addLeaf(bytes32 _leaf) public {
-        uint256 currentLeaf = _currentLeaf.current();
+        _currentLeaf.increment();
+        uint256 currentLeaf = _currentLeaf.current() - 1;
         require(currentLeaf < numberOfLeaves - 1, "You have exceeded the number of base leaves in the tree");
         merkleTreeNodes[currentLeaf] = _leaf;
-        _currentLeaf.increment();
-        updateMerkleTree();
+        updateMerkleTree(currentLeaf);
     }
 
     /**
     * @dev Getter for Merkle Root
     */
     function getRoot() public view returns(bytes32) {
-        return merkleTreeNodes[numberOfLeaves*2 - 1];
+        return merkleTreeNodes[numberOfLeaves*2 - 2];
+    }
+
+    /**
+    * @dev Get the whole merkle tree as array
+    */
+    function getMerkleTree() public view returns(bytes32[] memory) {
+        return merkleTreeNodes;
     }
 
     /**
@@ -123,6 +130,10 @@ contract NiftyOnchainMetadata is ERC721("zkNifty", "ZKNFT"), MerkleProof {
             _name,
             _description
         );
+        bytes32 newMintHash = keccak256(
+            abi.encodePacked(msg.sender, to, newNiftyId, _name, _description)
+        );
+        addLeaf(newMintHash);
         _tokenMetadata[newNiftyId] = _metadata;
         return newNiftyId;
     }
