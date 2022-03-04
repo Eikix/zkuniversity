@@ -22,7 +22,7 @@ Here is a screenshot of the execution.
 #### Do we really need zkProofs for this?
 
 Well, not really! Here, we are constructing a merkle root using initial leaves as public inputs. Many different programming languages could construct a merkle root using leaves as parameters.
-A smart contract like <a href="https://solidity-by-example.org/app/merkle-tree/"> this </a> could achieves a similar thing as it verifies if a leaf is inside a merkle tree using a merkle root and some well-chosen tree nodes. Or simply creating a smart contract that takes in leaves as input and returns the merkle root is perfectly feasible.
+A smart contract like <a href="https://solidity-by-example.org/app/merkle-tree/"> this </a> could achieves a similar thing as it verifies if a leaf is inside a merkle tree using a merkle root and some well-chosen tree nodes.
 
 My only guess is that it must cost a lot of gas, meaning that on congested network, it might be expensive to create a merkle tree such as Ethereum.
 
