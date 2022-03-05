@@ -65,28 +65,30 @@ contract NiftyOnchainMetadata is ERC721("zkNifty", "ZKNFT"), MerkleProof {
     * @dev Updates a Merkle Tree given that we have added one leaf to it at position _leafPosition.
     */
     function updateMerkleTree(uint256 _leafPosition) public {
-        uint n = numberOfLeaves;
+        uint n = numberOfLeaves/2;
         uint offset = numberOfLeaves;
-        uint tempNodePosition = _leafPosition;
+        uint nodePositionOnCurrentLevel = _leafPosition;
+        uint tmpNodePosition = _leafPosition;
         // Current Level (as in Building Floor) of the Tree. Starts at 1 for base leafs.
-        uint currentTreeLevel = 2;
+        uint currentTreeLevel = 1;
         while (n > 0) {
-            uint treePosition = offset + tempNodePosition/2;
-            if (tempNodePosition % 2 == 0) {
+            uint treePosition = offset + nodePositionOnCurrentLevel/2;
+            if (nodePositionOnCurrentLevel % 2 == 0) {
                 merkleTreeNodes[treePosition] =
                     keccak256(
-                        abi.encodePacked(merkleTreeNodes[tempNodePosition], merkleTreeNodes[tempNodePosition + 1])
+                        abi.encodePacked(merkleTreeNodes[tmpNodePosition], merkleTreeNodes[tmpNodePosition + 1])
                     );
-            } else if (tempNodePosition % 2 == 1) {
+            } else if (nodePositionOnCurrentLevel % 2 == 1) {
                 merkleTreeNodes[treePosition] =
                     keccak256(
-                        abi.encodePacked(merkleTreeNodes[tempNodePosition - 1], merkleTreeNodes[tempNodePosition])
+                        abi.encodePacked(merkleTreeNodes[tmpNodePosition - 1], merkleTreeNodes[tmpNodePosition])
                     );
             }
-            n = n / 2;
             offset += n;
+            n = n / 2;
             currentTreeLevel += 1;
-            tempNodePosition = treePosition % (numberOfLeaves/currentTreeLevel);
+            nodePositionOnCurrentLevel = treePosition % (numberOfLeaves/currentTreeLevel);
+            tmpNodePosition = treePosition;
         }
     }
 

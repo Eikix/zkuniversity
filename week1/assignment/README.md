@@ -29,3 +29,19 @@ My only guess is that it must cost a lot of gas, meaning that on congested netwo
 #### Are there any technologies implementing this type of proof?
 
 I guess zkRollups are somehow close to this: many transactions (leaves) are bundled up together and submitted on an L1 for a verifier contract to verify that they are valid.
+
+### Q2.1
+
+Check out the solidity folder :)!
+
+### Q2.2
+
+Check out the Merkle structure of the NiftyOnchainMetadata.sol
+
+### Q2.3
+
+Here are some minting transactions !
+
+<img src="./zku_assignment1_mint1_elias.PNG">
+
+<img src="./zku_assignment1_mint2_elias.PNG">
