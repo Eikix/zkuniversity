@@ -21,6 +21,8 @@ With verification over re-execution, you get the following advantages:
 
 - Storage: If a node could boot up using the latest state of the network and a proof that this state results from the full history of the blockchain, then the community could circumvent the risk of excluding smaller nodes from the network.
 
+---
+
 ### Q1.2: Explain in brief what is a ZK VM (virtual machine) and how it works?
 
 The simplest definition I found is the following, from [Koh Wei Jie](https://medium.com/zeroknowledge/zero-knowledge-virtual-machines-the-polaris-license-and-vendor-lock-in-ab2c631cf139):
@@ -28,4 +30,5 @@ The simplest definition I found is the following, from [Koh Wei Jie](https://med
 > A ZK VM is a circuit that executes bytecode. It allows a prover to show that, given a set of inputs, as well as some bytecode, they have correctly executed the program code on said inputs.
 
 Here is a schema explaining zkVM, taken from [Bobbin Threadbare](https://ethresear.ch/t/a-sketch-for-a-stark-based-vm/7048).
+
 <img src="https://miro.medium.com/max/1400/0*qDEAgBo2DVxebgnF">
