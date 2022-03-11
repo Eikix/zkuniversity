@@ -1,4 +1,4 @@
-# Welcome to Assignment no. 2, week 2 of zkUniversity, by Harmony One. I'm Elias, and this is my attempt at this challenge. :rocket: :rocket: :lightbulb:
+## :rocket: :rocket: Welcome to Assignment no. 2, week 2 of zkUniversity, by Harmony One. I'm Elias, and this is my attempt at this challenge. :rocket: :rocket:
 
 ---
 
