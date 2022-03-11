@@ -32,3 +32,15 @@ The simplest definition I found is the following, from [Koh Wei Jie](https://med
 Here is a schema explaining zkVM, taken from [Bobbin Threadbare](https://ethresear.ch/t/a-sketch-for-a-stark-based-vm/7048).
 
 <img src="https://miro.medium.com/max/1400/0*qDEAgBo2DVxebgnF">
+
+It is important to note, for clarity's sake, that:
+
+> Notably, the bytecode (or program) is not the circuit itself, but part of its inputs. As such, a prover can use the same circuit to create proofs of validity of execution for arbitrary programs, as long as said programs fit the underlying ZK VM circuit.
+
+#### Q1.2.1: Give examples of certain projects building Zk VMs
+
+| zkVM       | Architecture          | Language              | Type of zkp | Corporation / Foundation |
+| ---------- | --------------------- | --------------------- | ----------- | ------------------------ |
+| Miden VM   | Upgrade of Distaff VM | Rust + assembly-like  | zk-Stark    | Polygon                  |
+| Distaff VM | Distaff VM            | Rust + assembly-like  | zk-Stark    | zCloak (GuildOfWeavers)  |
+| Cairo VM   | Cairo VM              | Cairo (assembly-like) | zk-Stark    | Starkware                |
