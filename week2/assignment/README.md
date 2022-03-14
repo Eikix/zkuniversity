@@ -199,3 +199,57 @@ template Semaphore(nLevels) {
 
 component main {public [signalHash, externalNullifier]} = Semaphore(20);
 ```
+
+### Question 2.3: Use Elefria protocol on the Harmony Testnet
+
+#### Question 2.3.1: What potential challenges are there to overcome in such an authentication system?
+
+In my experience, the time to generate a witness was very long.
+Moreover, saving a password, as well as 2 random secrets can really be a pain for end user. This approach creates a lot of user friction for UX.
+
+<img src="./assets/week2semaphore_elefria_Elias.PNG">
+
+---
+
+## Question 3: Tornado Cash
+
+### Question 3.1
+
+It appears former [Tornado pools](https://github.com/tornadocash/tornado-trees) allowed a per poor fixed amount of deposit/withdrawal. As of Tornado Cash [Nova](https://github.com/tornadocash/tornado-nova), users can deposit and withdraw arbitrary amounts inside the tornado cash pools.
+
+Note: At the time of the [article](https://tornado-cash.medium.com/tornado-cash-introduces-arbitrary-amounts-shielded-transfers-8df92d93c37c), these pools are in beta and max amount of deposit is 1 ETH.
+
+Users can now do shielded transfers within the pool without having to withdraw and re-deposit. Thus, they can do intrapool transactions.
+
+Tornado Cash Nova chose Gnosis Chain (former xDai) as L2 for their low gas fees, fast withdrawal time (minutes). They utilize under the hood the ETH <> WETH L2 Gnosis Bridge. Users might therefore consider the risk of using Tornado Cash to be slightly increased: from only zk-proof technology risk (greenness of the tech) to now bridge technology risk on top of it. Nonetheless, this is an acceptable risk as this bridge is part of the major bridges and has been audited.
+
+### Question 3.2
+
+Here is the circuit: [circuits/TreeUpdateArgsHasher.circom](https://github.com/tornadocash/tornado-trees/blob/master/circuits/TreeUpdateArgsHasher.circom).
+
+See the smart contract: [contracts/TornadoTrees.sol](https://github.com/tornadocash/tornado-trees/blob/master/contracts/TornadoTrees.sol)
+
+Clarifications to help understand the underlying structure:
+
+- elements to be added to merkle tree: information relevant to the users' action (deposit, withdrawal, transaction);
+- Tornado Cash's priorities are privacy and gas optimization. They will use as many smart and crafty operations to reduce gas usage.
+- Although elements that are added to the merkle tree are not included in the EVM side as storage, they are included as calldata (16 gas vs. 625 gas per byte of data).
+
+Tornado Cash uses zkSnarks for its compression capabilities and privacy enabling.
+Tornado Cash uses an updatable merkle tree to upload an array of authorized users to the blockchain. These users are stored in a merkle root and will then be able to withdraw some amount off a pool. The zkSnarks are used to do the computation offchain in order to save gas, and prove onchain the correctness of the elements added.
+
+The circom circuit will pack all the elements and hash them using sha256.
+
+#### How does it work?
+
+1. User constructs the proof (.circom related files) of their elements being added to the Tornado pool (merkle tree).
+
+2. Call is made to the smart contract (.sol, EVM related process) where the proof is submitted onchain, the elements are submitted as call-data and packed as bytes and then rechecked. Then, checks are made to see that everything matches and correctness of the submitted elements.
+
+3. User is successfully added to withdrawal tree.
+
+Note: All the SNARK public inputs are hashed together to be submitted as only one public input to the verifier. This is aimed at minimize elliptic curve computations, thus saving a lot of gas. The tradeoff is to have more computation on the SNARK side.
+
+### Question 3.2.2: Why do you think we use the SHA256 hash here instead of the Poseidon hash used elsewhere?
+
+Here is the situation at hand: SHA256 relatively light gas-wise on the EVM, but on-chain Poseidon is very expensive. On the contrary, SHA256 is very expensive on circom and Poseidon isn't. Since Tornado wants to save money through gas optimization, they chose to put the computation pressure on the side of SNARK building.
