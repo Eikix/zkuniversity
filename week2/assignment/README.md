@@ -39,12 +39,11 @@ It is important to note, for clarity's sake, that:
 
 #### Q1.2.1: Give examples of certain projects building Zk VMs
 
-| zkVM       | Architecture          | Language              | Type of zkp | Corporation / Foundation | Language support     | Functional / data Privacy            |
-| ---------- | --------------------- | --------------------- | ----------- | ------------------------ | ---------------------| ------------------------------------ |
-| Miden VM   | Upgrade of Distaff VM | Rust + assembly-like  | zk-Stark    | Polygon                  | Solidity, Move, Sway | Soon (WIP                            |
-| Distaff VM | Distaff VM            | Rust + assembly-like  | zk-Stark    | zCloak (GuildOfWeavers)  | Distaff Instructions | N/A                                  |
-| Cairo VM   | Cairo VM              | Cairo (assembly-like) | zk-Stark    | Starkware                | Cairo                | Yes                                  |
-
+| zkVM       | Architecture          | Language              | Type of zkp | Corporation / Foundation | Language support     | Functional / data Privacy |
+| ---------- | --------------------- | --------------------- | ----------- | ------------------------ | -------------------- | ------------------------- |
+| Miden VM   | Upgrade of Distaff VM | Rust + assembly-like  | zk-Stark    | Polygon                  | Solidity, Move, Sway | Soon (WIP                 |
+| Distaff VM | Distaff VM            | Rust + assembly-like  | zk-Stark    | zCloak (GuildOfWeavers)  | Distaff Instructions | N/A                       |
+| Cairo VM   | Cairo VM              | Cairo (assembly-like) | zk-Stark    | Starkware                | Cairo                | Yes                       |
 
 ### Q1.2.2: What are the advantages and disadvantages of some of the existing Zk VMs?
 
@@ -54,4 +53,20 @@ It is important to note, for clarity's sake, that:
 
 - ➕ It can offer a better user experience: you don't have to worry about ceremony of ptau, circuits coding, proof generation or anything and enjoy security of ZKP.
 
-### Q1.2.3: Explain in detail one of the Zk VM architectures using diagrams.
+---
+
+## Question 1: Semaphore
+
+### Question 2.1: What is Semaphore?
+
+As per [Semaphore's ](https://github.com/appliedzkp/semaphore) definition:
+
+> Semaphore is a zero-knowledge gadget which allows Ethereum users to prove their membership of a set without revealing their original identity. At the same time, it allows users to signal their endorsement of an arbitrary string. It is designed to be a simple and generic privacy layer for Ethereum DApps. Use cases include private voting, whistleblowing, mixers, and anonymous authentication.
+
+In my own words, I view it as a way to authentify yourself privately and do something. This can range from anonymous voting and whistleblowing as mentioned above, to tools that enable your transactions to be untraceable and anonymous.
+
+### Question 2.2: Clone the semaphore repo
+
+#### Question 2.2.1: Run the tests
+
+<img src="./assets/week2semaphoreElias.PNG">
