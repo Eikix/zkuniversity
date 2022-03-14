@@ -86,14 +86,15 @@ Here is a screenshot of all the tests running.
 
 #### Question 2.2.2
 
+For clarity, here's a scheme of how the [circuit](https://github.com/appliedzkp/semaphore/blob/3bce72febeba48454cb618a1f690045c04809900/circuits/scheme.png) works.
+
+<img src="./assets/week2semaphore_scheme_Elias.png">
+
 Here, we reproduce the file's code template per template. You can otherwise find it [here](https://github.com/appliedzkp/semaphore/blob/3bce72febeba48454cb618a1f690045c04809900/circuits/semaphore.circom) at the commit hash 3bce72f.
 
+The template `CalculateSecret()` is aimed at generating a secret for the user. The hash of both the identityNullifier and the identity trapdoor will produce this secret. These two inputs are two random secrets that only the user knows and sends to the circuit as private inputs.
+
 ```
-pragma circom 2.0.0;
-
-include "../node_modules/circomlib/circuits/poseidon.circom";
-include "./tree.circom";
-
 template CalculateSecret() {
     signal input identityNullifier;
     signal input identityTrapdoor;
@@ -109,6 +110,8 @@ template CalculateSecret() {
 }
 ```
 
+The template `CalculateIdentityCommitment()` is aimed at generating the user's identity commitment. It is simply the poseidon hash of the poseidon digest of the two secrets aforementioned (IT and IN). That is: `Poseidon(Poseidon(IT, IN))`
+
 ```
 template CalculateIdentityCommitment() {
     signal input secret;
@@ -122,6 +125,8 @@ template CalculateIdentityCommitment() {
     out <== poseidon.out;
 }
 ```
+
+The template `CalculateNullifierHash()` takes in the external nullifier (that prevents double calling/ re-entrancy) and the identity nullifier (user secret) to form a public nullifier.
 
 ```
 template CalculateNullifierHash() {
@@ -138,6 +143,10 @@ template CalculateNullifierHash() {
     out <== poseidon.out;
 }
 ```
+
+This is the main template. `Semaphore(nLevels)` will include the other templates and enforce the structure shown in the schema above. The external nullifier is a public input (I believe it works kind of like a nonce, or a one time validation string to prove you are not submitting twice). The treePathIndices and treeSiblings are variables that will be used to update the merkle tree and include the output of the `CalculateIdentityCommitment` template.
+The user's indentity commitment is thus commited to the merkle tree, the `inclusionProof.leaf` binds it to the merkle tree, a new merkle root is produced. The user can now be authentified safely and securely.
+`signalHashSquared` is meant to prevent signal tampering through squaring the signaHash itself. I'm not too sure how signal tampering takes place.
 
 ```
 
