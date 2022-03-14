@@ -39,8 +39,19 @@ It is important to note, for clarity's sake, that:
 
 #### Q1.2.1: Give examples of certain projects building Zk VMs
 
-| zkVM       | Architecture          | Language              | Type of zkp | Corporation / Foundation |
-| ---------- | --------------------- | --------------------- | ----------- | ------------------------ |
-| Miden VM   | Upgrade of Distaff VM | Rust + assembly-like  | zk-Stark    | Polygon                  |
-| Distaff VM | Distaff VM            | Rust + assembly-like  | zk-Stark    | zCloak (GuildOfWeavers)  |
-| Cairo VM   | Cairo VM              | Cairo (assembly-like) | zk-Stark    | Starkware                |
+| zkVM       | Architecture          | Language              | Type of zkp | Corporation / Foundation | Language support     | Functional / data Privacy            |
+| ---------- | --------------------- | --------------------- | ----------- | ------------------------ | ---------------------| ------------------------------------ |
+| Miden VM   | Upgrade of Distaff VM | Rust + assembly-like  | zk-Stark    | Polygon                  | Solidity, Move, Sway | Soon (WIP                            |
+| Distaff VM | Distaff VM            | Rust + assembly-like  | zk-Stark    | zCloak (GuildOfWeavers)  | Distaff Instructions | N/A                                  |
+| Cairo VM   | Cairo VM              | Cairo (assembly-like) | zk-Stark    | Starkware                | Cairo                | Yes                                  |
+
+
+### Q1.2.2: What are the advantages and disadvantages of some of the existing Zk VMs?
+
+- ➖ Entrusting a zkVM to go from custom programming language => circuits (and if needed trusted setups) + proofs means that there is now a single point of failure in this technology. This can also be an advantage if the zkVM is well audited, this saves individual circom circuits to be faulty. This is a one size fits all vs. many smaller programs dilemna.
+- ➖ There might be some kind of vendor lock-in.
+- ➖ It could be that writing in a user-friendly language such as circom is as practicable (if not more) as writing in some custom assembly-like zkVM language.
+
+- ➕ It can offer a better user experience: you don't have to worry about ceremony of ptau, circuits coding, proof generation or anything and enjoy security of ZKP.
+
+### Q1.2.3: Explain in detail one of the Zk VM architectures using diagrams.
