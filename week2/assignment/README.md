@@ -225,6 +225,8 @@ Tornado Cash Nova chose Gnosis Chain (former xDai) as L2 for their low gas fees,
 
 ### Question 3.2
 
+#### Question 3.2.1
+
 Here is the circuit: [circuits/TreeUpdateArgsHasher.circom](https://github.com/tornadocash/tornado-trees/blob/master/circuits/TreeUpdateArgsHasher.circom).
 
 See the smart contract: [contracts/TornadoTrees.sol](https://github.com/tornadocash/tornado-trees/blob/master/contracts/TornadoTrees.sol)
@@ -250,6 +252,27 @@ The circom circuit will pack all the elements and hash them using sha256.
 
 Note: All the SNARK public inputs are hashed together to be submitted as only one public input to the verifier. This is aimed at minimize elliptic curve computations, thus saving a lot of gas. The tradeoff is to have more computation on the SNARK side.
 
-### Question 3.2.2: Why do you think we use the SHA256 hash here instead of the Poseidon hash used elsewhere?
+#### Question 3.2.2: Why do you think we use the SHA256 hash here instead of the Poseidon hash used elsewhere?
 
 Here is the situation at hand: SHA256 relatively light gas-wise on the EVM, but on-chain Poseidon is very expensive. On the contrary, SHA256 is very expensive on circom and Poseidon isn't. Since Tornado wants to save money through gas optimization, they chose to put the computation pressure on the side of SNARK building.
+
+### Question 3.3
+
+#### Question 3.3.1
+
+Here is a screenshot of the tests passing.
+
+<img src="./assets/week2tornadocash_Elias.PNG">
+
+#### Question 3.3.2
+
+See [tornado](./tornado-nova/test/custom.test.js)
+
+<img src="./assets/week2tornadocash_customtest_Elias.PNG">
+
+## Question 4
+
+### Question 4.1: If you have a chance to meet with the people who built Tornado Cash & Semaphore, what questions would you ask them about their protocols?
+
+Hi guys! First of, I just want to thank you. This has been really an amazing journey and I appreciate how hard this must've been. Congrats!
+I'd like to ask how you see the expansion of zkVMs and in a larger sense the opposition between Blockchain specifically designed for zk-enabled apps (mixers, voting, privacy, anything zkStark / zkSnark friendly) vs. application specifically designed for zk-proofs but on general purpose blockchains such as Ethereum and others.
