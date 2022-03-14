@@ -69,4 +69,15 @@ In my own words, I view it as a way to authentify yourself privately and do some
 
 #### Question 2.2.1: Run the tests
 
+Note for anyone: I had to run `yarn hardhat typechain` before being able to run tests.
+Got the following CLI message when running `yarn test` without the above mentioned command:
+
+> test/SemaphoreVoting.ts:6:33 - error TS2307: Cannot find module '../build/typechain' or its corresponding type declarations.
+> 6 import { SemaphoreVoting } from "../build/typechain"
+
+Got the following CLI messsage after running it:
+
+> Generating typings for: 0 artifacts in dir: ./build/typechain for target: ethers-v5
+> Successfully generated 29 typings!
+
 <img src="./assets/week2semaphoreElias.PNG">
