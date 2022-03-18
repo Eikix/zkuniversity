@@ -23,3 +23,4 @@ Note that if we wanted to be super safe, we could do several rounds of salt (I r
 
 ### Question 2.2: Picking another card from the suite
 
+See [commit_card](./commit_card)
