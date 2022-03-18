@@ -24,3 +24,12 @@ Note that if we wanted to be super safe, we could do several rounds of salt (I r
 ### Question 2.2: Picking another card from the suite
 
 See [commit_card](./card_commit)
+
+## Question 3
+
+### Question 3.1: What problem does MACI not solve?
+
+MACI does not solve the issue of creating tons of accounts and flooding the voting pools. There would need to be some proof-of-identity, or some kind of unique voting system to counteract multiplying keys to influence a vote.
+
+### Question 3.2: How can a pseudorandom dice roll be simulated using just Solidity?
+
