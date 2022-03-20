@@ -23,3 +23,22 @@ Note that if we wanted to be super safe, we could do several rounds of salt (I r
 
 ### Question 2.2: Picking another card from the suite
 
+See [commit_card](./card_commit)
+
+## Question 3
+
+### Question 3.1: What problem does MACI not solve?
+
+MACI does not solve the issue of creating tons of accounts and flooding the voting pools. There would need to be some proof-of-identity, or some kind of unique voting system to counteract multiplying keys to influence a vote.
+
+### Question 3.2: How can a pseudorandom dice roll be simulated using just Solidity?
+
+#### Q3.2.1
+
+You could take the current block and hash it and then cast the hash to a uint256. You could try as much as possible to make this sophisticated: add in the user's address, some nonce and even a contract function call to provide some kind of external number, but this is all deterministic. This is made by design as a Blockchain's VM must have determinism at its core values in order to function. The obvious problem is that someone could design a program to obtain exactly a number they want with the correct inputs.
+
+#### Q3.2.2: How would you design a multi party system that performs a dice roll?
+
+I would create a smart contract where:
+1. a function can be called to open a dice roll round. 
+2. the round lasts X blocks
