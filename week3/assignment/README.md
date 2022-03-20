@@ -44,4 +44,11 @@ I would create a smart contract where:
 1. a function can be called to open a dice roll round. 
 2. the round lasts X blocks (decided by design or by global variable)
 3. while the dice roll round is open, a function called `addRandomness` can be called by anyone. this function takes the msg.sender, the block timespan of the call, and hash the current lastRandomRoll and these two variables together, and stores it in lastRandomRoll.
-4. when the round finishes, you cannot call this function `addRandomness` anymore. You can now call `getRoll` which exposes lastRandomRoll to anyone that wants to see the result, until a new round starts.
+4. when the round finishes, you cannot call this function `addRandomness` anymore. You can now call `getRoll` which exposes lastRandomRoll to anyone that wants to see the result as a typecasted uint256, until a new round starts.
+
+#### Q3.2.3
+I would believe that the first approach is deterministic so it's not reliable to achieve pseudo-randomness. As for the second approach, it is a bit better (also very expensive in terms of gas) as the more players play, the harder it is to predict the end result. I believe it is more fair, although convoluted. 
+
+#### Q2.2.4
+I'm not sure how to manipulate the result. I guess one way would be to monitor the calls to this function and reconstruct the lastRandomRoll variable from these calls (who called the smart contract, i.e. what address and what timestamp).
+
