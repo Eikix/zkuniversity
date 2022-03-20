@@ -40,5 +40,8 @@ You could take the current block and hash it and then cast the hash to a uint256
 #### Q3.2.2: How would you design a multi party system that performs a dice roll?
 
 I would create a smart contract where:
+0. a global variable called lastRandomRoll is bytes32, initiated at 0, private.
 1. a function can be called to open a dice roll round. 
-2. the round lasts X blocks
+2. the round lasts X blocks (decided by design or by global variable)
+3. while the dice roll round is open, a function called `addRandomness` can be called by anyone. this function takes the msg.sender, the block timespan of the call, and hash the current lastRandomRoll and these two variables together, and stores it in lastRandomRoll.
+4. when the round finishes, you cannot call this function `addRandomness` anymore. You can now call `getRoll` which exposes lastRandomRoll to anyone that wants to see the result, until a new round starts.
