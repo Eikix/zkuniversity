@@ -15,9 +15,9 @@ MiMCSponge_1_run,
 CommitCard_2_run };
 uint get_main_input_signal_start() {return 3;}
 
-uint get_main_input_signal_no() {return 3;}
+uint get_main_input_signal_no() {return 4;}
 
-uint get_total_signal_no() {return 2660;}
+uint get_total_signal_no() {return 2661;}
 
 uint get_number_of_components() {return 5;}
 
@@ -1527,19 +1527,19 @@ uint sub_component_aux;
 PFrElement aux_dest = &lvar[0];
 // load src
 // end load src
-Fr_copy(aux_dest,&circuitConstants[7]);
+Fr_copy(aux_dest,&circuitConstants[3]);
 }
 {
 PFrElement aux_dest = &lvar[1];
 // load src
 // end load src
-Fr_copy(aux_dest,&circuitConstants[0]);
+Fr_copy(aux_dest,&circuitConstants[7]);
 }
 {
 PFrElement aux_dest = &lvar[2];
 // load src
 // end load src
-Fr_copy(aux_dest,&circuitConstants[3]);
+Fr_copy(aux_dest,&circuitConstants[0]);
 }
 {
 uint aux_create = 0;
@@ -1666,7 +1666,7 @@ void CommitCard_2_create(uint soffset,uint coffset,Circom_CalcWit* ctx,std::stri
 ctx->componentMemory[coffset].templateId = 2;
 ctx->componentMemory[coffset].templateName = "CommitCard";
 ctx->componentMemory[coffset].signalStart = soffset;
-ctx->componentMemory[coffset].inputCounter = 3;
+ctx->componentMemory[coffset].inputCounter = 4;
 ctx->componentMemory[coffset].componentName = componentName;
 ctx->componentMemory[coffset].idFather = componentFather;
 ctx->componentMemory[coffset].subcomponents = new uint[1];
@@ -1682,13 +1682,13 @@ u64 myId = ctx_index;
 u32* mySubcomponents = ctx->componentMemory[ctx_index].subcomponents;
 FrElement* circuitConstants = ctx->circuitConstants;
 std::string* listOfTemplateMessages = ctx->listOfTemplateMessages;
-FrElement expaux[2];
+FrElement expaux[3];
 FrElement lvar[0];
 uint sub_component_aux;
 {
 uint aux_create = 0;
 int aux_cmp_num = 0+ctx_index+1;
-uint csoffset = mySignalStart+5;
+uint csoffset = mySignalStart+6;
 for (uint i = 0; i < 1; i++) {
 std::string new_cmp_name = "digest";
 mySubcomponents[aux_create+i] = aux_cmp_num;
@@ -1697,6 +1697,9 @@ csoffset += 2654 ;
 aux_cmp_num += 4;
 }
 }
+Fr_eq(&expaux[0],&signalValues[mySignalStart + 2],&signalValues[mySignalStart + 4]); // line circom 17
+if (!Fr_isTrue(&expaux[0])) std::cout << "Failed assert in template/function " << myTemplateName << " line 17. " <<  "Followed trace of components: " << ctx->getTrace(myId) << std::endl;
+assert(Fr_isTrue(&expaux[0]));
 {
 uint cmp_index_ref = 0;
 {
@@ -1714,7 +1717,7 @@ uint cmp_index_ref = 0;
 PFrElement aux_dest = &ctx->signalValues[ctx->componentMemory[mySubcomponents[cmp_index_ref]].signalStart + 1];
 // load src
 // end load src
-Fr_copy(aux_dest,&signalValues[mySignalStart + 2]);
+Fr_copy(aux_dest,&signalValues[mySignalStart + 3]);
 }
 // no need to run sub component
 assert(--ctx->componentMemory[mySubcomponents[cmp_index_ref]].inputCounter);
@@ -1725,7 +1728,7 @@ uint cmp_index_ref = 0;
 PFrElement aux_dest = &ctx->signalValues[ctx->componentMemory[mySubcomponents[cmp_index_ref]].signalStart + 2];
 // load src
 // end load src
-Fr_copy(aux_dest,&signalValues[mySignalStart + 3]);
+Fr_copy(aux_dest,&signalValues[mySignalStart + 4]);
 }
 // no need to run sub component
 assert(--ctx->componentMemory[mySubcomponents[cmp_index_ref]].inputCounter);
@@ -1736,7 +1739,7 @@ uint cmp_index_ref = 0;
 PFrElement aux_dest = &ctx->signalValues[ctx->componentMemory[mySubcomponents[cmp_index_ref]].signalStart + 3];
 // load src
 // end load src
-Fr_copy(aux_dest,&signalValues[mySignalStart + 4]);
+Fr_copy(aux_dest,&signalValues[mySignalStart + 5]);
 }
 // need to run sub component
 assert(!(--ctx->componentMemory[mySubcomponents[cmp_index_ref]].inputCounter));
@@ -1752,7 +1755,7 @@ Fr_copy(aux_dest,&ctx->signalValues[ctx->componentMemory[mySubcomponents[0]].sig
 PFrElement aux_dest = &signalValues[mySignalStart + 1];
 // load src
 // end load src
-Fr_copy(aux_dest,&signalValues[mySignalStart + 3]);
+Fr_copy(aux_dest,&signalValues[mySignalStart + 4]);
 }
 }
 

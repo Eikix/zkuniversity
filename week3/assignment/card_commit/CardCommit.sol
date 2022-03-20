@@ -9,6 +9,14 @@ contract CardCommit {
         bytes32 cardHash;
         uint8 cardSuite;
     }
+
+    struct Proof {
+        uint[2] a;
+        uint[2][2] b;
+        uint[2] c;
+        uint[2] input;
+    }
+
     mapping(address => Card) public playerCards;
 
     constructor(address _verifierAddress) {
@@ -18,14 +26,13 @@ contract CardCommit {
     function commitCard(
         bytes32 cardHash,
         uint8 cardSuite,
-        uint[2] memory a,
-        uint[2][2] memory b,
-        uint[2] memory c,
-        uint[2] memory input
+        Proof memory proof
     ) public {
         require(
-            IVerifier(verifierAddress).verifyProof(a, b, c, input),
+            IVerifier(verifierAddress).verifyProof(proof.a, proof.b, proof.c, proof.input),
             "Failed to verify the proof"
         );
+        playerCards[msg.sender] = Card(cardHash, cardSuite);
+
     }
 }
