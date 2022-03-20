@@ -55,3 +55,5 @@ I'm not sure how to manipulate the result. I guess one way would be to monitor t
 Now the last person of the round cannot guess the outcome with better information than other people! VDF solves this issue 🚀🚀 by adding a last step to ensure randomness.
 
 
+
+
