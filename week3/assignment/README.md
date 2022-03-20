@@ -50,5 +50,8 @@ I would create a smart contract where:
 I would believe that the first approach is deterministic so it's not reliable to achieve pseudo-randomness. As for the second approach, it is a bit better (also very expensive in terms of gas) as the more players play, the harder it is to predict the end result. I believe it is more fair, although convoluted. 
 
 #### Q2.2.4
-I'm not sure how to manipulate the result. I guess one way would be to monitor the calls to this function and reconstruct the lastRandomRoll variable from these calls (who called the smart contract, i.e. what address and what timestamp).
+I'm not sure how to manipulate the result. I guess one way would be to monitor the calls to this function and reconstruct the lastRandomRoll variable from these calls (who called the smart contract, i.e. what address and what timestamp) and try to grab the "last" call to predict the outcome.
+
+Now the last person of the round cannot guess the outcome with better information than other people! VDF solves this issue 🚀🚀 by adding a last step to ensure randomness.
+
 
