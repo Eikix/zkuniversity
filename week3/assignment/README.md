@@ -54,6 +54,14 @@ I'm not sure how to manipulate the result. I guess one way would be to monitor t
 
 Now the last person of the round cannot guess the outcome with better information than other people! VDF solves this issue 🚀🚀 by adding a last step to ensure randomness.
 
+### Question 3
 
+#### Question 3.1
+
+Interep uses Semaphore in order to hide (mixer functionality?) the identity of users that connected their OAuth to Interep. Their reputation on the connected social media is saved and can now be used to gain trustworthiness (in terms of credibility as a user and not being a bot). Their identity however, remains private.
+
+It appears Interep needs a centralized server to enable OAuth (register as app?) and persist the OAuth connection.
+
+#### Question 3.2
 
 
