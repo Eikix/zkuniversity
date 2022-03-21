@@ -26,4 +26,4 @@ snarkjs zkey export verificationkey cardCommit_0001.zkey verification_key.json
 
 snarkjs groth16 prove cardCommit_0001.zkey witness.wtns proof.json public.json
 
-snarkjs zkey export solidityverifier cardCommit_0001.zkey verifier.sol
+snarkjs zkey export solidityverifier cardCommit_0001.zkey Verifier.sol

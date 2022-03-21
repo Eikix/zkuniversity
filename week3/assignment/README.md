@@ -54,14 +54,43 @@ I'm not sure how to manipulate the result. I guess one way would be to monitor t
 
 Now the last person of the round cannot guess the outcome with better information than other people! VDF solves this issue 🚀🚀 by adding a last step to ensure randomness.
 
-### Question 3
+### Question 4
 
-#### Question 3.1
+#### Question 4.1
 
 Interep uses Semaphore in order to hide (mixer functionality?) the identity of users that connected their OAuth to Interep. Their reputation on the connected social media is saved and can now be used to gain trustworthiness (in terms of credibility as a user and not being a bot). Their identity however, remains private.
 
 It appears Interep needs a centralized server to enable OAuth (register as app?) and persist the OAuth connection.
 
-#### Question 3.2
+#### Question 4.2
 
+Here are screenshots of execution:
+
+<img src="./assets/Screenshot 2022-03-21 at 00.26.44.png">
+
+---
+
+<img src="./assets/Screenshot 2022-03-21 at 00.28.51.png">
+
+It appears the merkle tree gets updated as soon as someone joins the group or leaves it:).
+
+#### Question 4.3
+
+Here is calling the API with having joined the group.
+`curl http://localhost:3000/api/v1/groups `
+
+---
+
+<img src="./assets/apicall.png">
+
+And then having left the group...
+
+<img src="./assets/apicallquitgroup.png">
+
+### Question 5: 
+
+#### Question 5.1: If you have a chance to meet with the people who built DarkForest and InterRep, what questions would you ask them about their protocols?
+
+Hi y'all! First of all thanks for making all your work open source and so cool! 
+Second: my question goes to Interep, how do you view the tradeoff between hybrid approach like yours (web2 auth for credibility and proof of manhood + web3 tooling for privacy) and pure crypto native approach of authentication?
 
