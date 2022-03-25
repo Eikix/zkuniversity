@@ -12,7 +12,7 @@ Welcome 😊😊! Good to see you again.
 | Sidechains                | No           | No                    | Not really (usually just a validator set)                                                  | Bridge from and to main chain       | Yes                                                  | Depends but mostly                                             |
 | Plasma                    | Yes          | No                    | Yes, an operator to commit data as merkle root                                             | Commit merkle root                  | No, challenge periods are very long (7 days approx.) | Yes                                                            |
 | Optimistic Rollups        | No           | No                    | Yes                                                                                        | Commit batching of state transition | Yes, very (if not fastest, but only for processing, not withdrawals)                           | Yes                                                            |
-| ZK Rollups                | No           | No                    | No, only reliant on proper setup (correct trusted setup for SNARKs, transparent for STARK) | Commit zkproof of state transition  | Yes, very                                            | Yes                                                            |
+| ZK Rollups                | No           | No                    | No, only reliant on proper setup (correct trusted setup for SNARKs, transparent for STARK), still exposed to data availability issue | Commit zkproof of state transition  | Yes, very                                            | Yes                                                            |
 
 
 It feels as though main problems for Plasma approach are: data availability (i.e. an operator withholding the merkle root to block people's freedom to move funds) and delay to withdraw.
@@ -22,3 +22,6 @@ Here's a small comparison table from [Preethi Kasireddy](https://www.preethikasi
 
 ### Question 1.2
 
+Here's a schema I found on [vitalik's blog](vitalik.ca).
+
+<img src="./zkrollup_vitalik.png">
