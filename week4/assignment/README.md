@@ -2,6 +2,11 @@
 
 Welcome 😊😊! Good to see you again.
 
+## Question 0: Which track do you choose?
+
+I choose track B, the dApp track.
+
+
 ## Question 1: Scaling the future
 
 ### Question 1.1. 
@@ -74,3 +79,20 @@ A stateless node can be correct in its validation with the following parameters:
 3. a zero-knowledge proof that proves the new state root is a result of updating the current state merkle tree with the new block's information.
 
 In conclusion: zero-knowledge proofs improve on the stateless client concept as they allow for a fully stateless validation process. Without zero-knowledge technology (or polynomial commitments), the state transition function in a stateless client has to incorporate a "semi-stateful" witness (i.e. parts of the state that is read and modified). By providing only current and future merkle root of the state, the new block and a zero-knowledge proof, nodes can now simply verify zero-knowledge proofs and expect that the proof will return *true*, if and only if the new block is valid.
+
+
+## Question 2
+
+### Question 2.3
+
+As I understand it, zkSync 2.0 will present two main services to user (expected for end of summer 2022):
+- the zkrollup smart contract, with full on-chain data availability but higher fees.
+- zkPorter, with off-chain (off Eth L1) data availability guaranteed by zkSync PoS staking nodes, with lower fees.
+
+Note: both these solutions will allow for full solidity compatibility, and Rust smart contract programming as well.
+
+In the words of [Matter Labs](https://blog.matter-labs.io/zkporter-a-breakthrough-in-l2-scaling-ed5e48842fbf):
+
+> Every user is free to opt into their own security threshold. Any user who wants all data available on-chain can stay completely on the rollup side. But if you are a fee-sensitive user, you can choose to make zkPorter your home. (We suspect that traders and new users will most likely use zkPorter.)
+
+This essentially means that zkPorter is slightly less secure than the standard zkrollup smart contract but has 10x its transaction throughput. As a result, sensitive operations should be done on the zkrollup smart contract, for full data availability (to prevent state being unaccessible in the event of important transactions). On the contrary, gameFi, less sensitive operations (maybe NFT marketplaces), etc. can be done on zkPorter. 
