@@ -48,3 +48,16 @@ Here's an interesting quote I read from a [Matter Labs' founder blog post](https
 > With the Merkle tree data at hand, users who are being censored always have the ability to claim their funds directly from the zkRollup contract on the mainnet. All they need to do is to provide a Merkle proof of ownership on their account. Thus, on-chain data availability serves as a guarantee that nobody (including zkRollup operators) can freeze nor capture users’ funds.
 
 From this I can tell that the data availability problem is solved for users of zkrollups, but that this limits the solution's throughput.
+
+### Question 1.3
+
+As stated in the question, the EVM is a big state machine. Its interaction with blocks can be represented as follows, with `stf` being the state transition function:
+```
+stf(current_state, block) = new_state
+````
+
+For Ethereum, running a full node (as opposed to stateless) has become very complex: heavy, a lot of computation, order is important so it's longer to bootstrap a node.
+
+A stateless client solves this issue by changing the parameters needed to validate a new state:
+
+
