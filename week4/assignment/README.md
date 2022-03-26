@@ -73,3 +73,4 @@ A stateless node can be correct in its validation with the following parameters:
 2. the new block 
 3. a zero-knowledge proof that proves the new state root is a result of updating the current state merkle tree with the new block's information.
 
+In conclusion: zero-knowledge proofs improve on the stateless client concept as they allow for a fully stateless validation process. Without zero-knowledge technology (or polynomial commitments), the state transition function in a stateless client has to incorporate a "semi-stateful" witness (i.e. parts of the state that is read and modified). By providing only current and future merkle root of the state, the new block and a zero-knowledge proof, nodes can now simply verify zero-knowledge proofs and expect that the proof will return *true*, if and only if the new block is valid.
