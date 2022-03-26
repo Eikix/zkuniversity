@@ -66,7 +66,7 @@ stf(current_state_merkle_root, block, witness) = new_state_root
 
 Firstly, this allows for actual validation and does not require any form of so-called optimism. Moreover, out of order validation is also made possible and might come in handy for fast bootstrap of nodes in the event of shard reshuffling (Eth2.0 sharding phase). The witness is used as a proof that the updated merkle root is a result of the block's change in state. 
 
-Nevertheless, this supposes that the change in state needs to be posted as a part of the witness. This means that several merkle branches need to be committed as part of the new block validation. There is a need for even lighter (in terms of bytes size) clients. There comes zero-knowledge proofs.
+Nevertheless, the part of the state that is read and updated needs to be posted as a part of the witness. This means that several merkle branches need to be committed as part of the new block validation. There is a need for even lighter (in terms of bytes size) clients. There comes zero-knowledge proofs.
 
 A stateless node can be correct in its validation with the following parameters: 
 1. the merkle root of the current state,
