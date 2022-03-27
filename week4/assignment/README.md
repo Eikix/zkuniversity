@@ -101,6 +101,10 @@ This essentially means that zkPorter is slightly less secure than the standard z
 
 ### Question 3.1: Why would someone use recursive SNARK’s? What issues does it solve? Are there any security drawbacks?
 
+I believe using recursive SNARKs allows for more compression while keeping the same assumption of cryptographic security. It solves the issue that SNARKs can be heavy to compute iteratively (say 10x in a row). I believe it's not an easy task to compute recursive SNARKs, I read [here](https://www.michaelstraka.com/posts/recursivesnarks/) that it poses many problems, such as: choosing a *pairing-friendly* curve, or doing some advanced circuits computation (so-called subcircuits).
+
+Note: maybe it's even harder to audit as well.
+
 ### Question 3.2: What is Kimchi and how does it improve PLONK?
 
 Kimchi is the technology used by Mina Blockchain to achieve a fized size, 22KB, blockchain. More precisely it is used to generate proofs by the recursion layer of Mina, called Pickles. 
