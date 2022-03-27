@@ -96,3 +96,32 @@ In the words of [Matter Labs](https://blog.matter-labs.io/zkporter-a-breakthroug
 > Every user is free to opt into their own security threshold. Any user who wants all data available on-chain can stay completely on the rollup side. But if you are a fee-sensitive user, you can choose to make zkPorter your home. (We suspect that traders and new users will most likely use zkPorter.)
 
 This essentially means that zkPorter is slightly less secure than the standard zkrollup smart contract but has 10x its transaction throughput. As a result, sensitive operations should be done on the zkrollup smart contract, for full data availability (to prevent state being unaccessible in the event of important transactions). On the contrary, gameFi, less sensitive operations (maybe NFT marketplaces), etc. can be done on zkPorter. 
+
+## Question 3: Recursive SNARK’s
+
+### Question 3.1: Why would someone use recursive SNARK’s? What issues does it solve? Are there any security drawbacks?
+
+### Question 3.2: What is Kimchi and how does it improve PLONK?
+
+Kimchi is the technology used by Mina Blockchain to achieve a fized size, 22KB, blockchain. More precisely it is used to generate proofs by the recursion layer of Mina, called Pickles. 
+
+Here's a scheme of the hierarchy of machinery used by Mina network. In the words of [Mina's blog](https://minaprotocol.com/ko/blog/kimchi-the-latest-update-to-minas-proof-system):
+
+> Pickles is the recursion layer, it is the protocol that we use to create proofs of proofs of proofs of … and reduce the blockchain to a fixed size of under 22KB.
+
+> Pickles need something to create proofs though, and this is what Kimchi is. [...] Kimchi is a collection of improvements, optimizations, and alterations made on top of PLONK.
+
+<img src="https://cdn-fagpn.nitrocdn.com/nvawPUgmLuenSpEkZxPTWilYhwRGNGyf/assets/static/optimized/rev-3239291/wp-content/uploads/5.png">
+
+Kimchi is aimed at improving [PLONK](https://eprint.iacr.org/2019/953.pdf). 
+
+1. Firstly, it overcomes the trusted setup problem by "using a bulletproof-style polynomial commitment inside of the protocol". This way, there is no risk that the setup might be done improperly.
+
+2. Kimchi has 15 registers, compared to 2 for PLONK.
+Here's an example of what registers look like:
+
+<img src="https://cdn-fagpn.nitrocdn.com/nvawPUgmLuenSpEkZxPTWilYhwRGNGyf/assets/static/optimized/rev-3239291/wp-content/uploads/20.png">
+
+Here is a broader architecture overview of the arithmetic circuits of Kimchi. Notable differences are: the existence of generic gates in Kimchi, that allow for both additions and multiplications and registers being split as IO registers (can be wired to the next one) + temporary registers.
+
+<img src="https://cdn-fagpn.nitrocdn.com/nvawPUgmLuenSpEkZxPTWilYhwRGNGyf/assets/static/optimized/rev-3239291/wp-content/uploads/24-2048x900.png">
