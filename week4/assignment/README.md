@@ -173,3 +173,12 @@ Initial insight: Say you want to prove to some Fantom node that you gave 200 Eth
 Proposed solution: Make a zkp of the delta of some EVM chain state -> Bob's account: from X to X + 200 Ether and my account: from Y to Y-200 (+ await some blocks for finality). This allows for multi-chain light clients and trustless bridging.
 
 Leveraged zero-knowledge proofs' characteristics: succintness and fairness
+
+## Question 5: Thinking in ZK
+
+### Question 5.1: If you have a chance to meet with the people who built ZKSync and Mina, what questions would you ask them about their protocols?
+
+Mina: How did the idea of a fixed size blockchain come about?
+
+zkSync: What do you think about the co-existence of Solidity and Rust smart contract programming right now in the blockchain sphere? How do you see the landscape evolving in the next 2 years (hard to project more than 3 years lol)?
+Will there be more and more Rust development of smart contracts and less Solidity? Or Solidity's advantage is too big and installed? What do you think Rust offers above Solidity?
