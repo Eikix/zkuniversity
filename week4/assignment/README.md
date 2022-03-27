@@ -152,24 +152,24 @@ Here's a TL;DR provided by Mina:
 
 #### Private inventory smart contract for web3 MMOs
 
-Initial insight:
+Initial insight: GameFi is evolving rapidly, communities of players long for more on-chain games. I believe that as game developers cooperate with blockchain engineers, more advanced games (triple A productions) will emerge soon. There is a need for some degree of privacy inside some type of games, such as MMOs. Players usually hold some kind of state of virtual items called inventory. Inventories are typically private in online games. Players may choose to equip, consume, sell or exchange items and thus expose them. Nonetheless, in every other situation, their items are kept secret. 
 
-Proposed solution:
+Proposed solution: A zkp inventory system in the form of a plug-in for EVM MMOs that enables any game to extend a standard for private inventories. 
 
-Leveraged zero-knowledge proofs' characteristics: 
+Leveraged zero-knowledge proofs' characteristics: most primarily privacy, but also succintness (for smaller storage space on-chain).
 
 #### Signature compressor for fully on-chain DAOs
 
-Initial insight:
+Initial insight: I'm thinking DAO with 200+ members that all need to sign on some proposal but that want to avoid running 200+ ecrecover on Ethereum while running everything on-chain (rather than off-chain on Snapshot).
 
-Proposed solution:
+Proposed solution: A service for any protocol that requires lots of aggregated signature (anything large scale multisig) to verify them with a ZKP off-chain and to extend a smart contract on-chain to verify it.
 
-Leveraged zero-knowledge proofs' characteristics: 
+Leveraged zero-knowledge proofs' characteristics: succintness and fairness
 
 #### Cross-chain state verifier smart contract (bridge tooling for interchain light clients) 
 
-Initial insight:
+Initial insight: Say you want to prove to some Fantom node that you gave 200 Ether to Bob on Ethereum L1 Chain, right now you have to rely on Relayer nodes that are trusted and sometimes centralized (e.g. Avalanche Bridge).
 
-Proposed solution:
+Proposed solution: Make a zkp of the delta of some EVM chain state -> Bob's account: from X to X + 200 Ether and my account: from Y to Y-200 (+ await some blocks for finality). This allows for multi-chain light clients and trustless bridging.
 
-Leveraged zero-knowledge proofs' characteristics: 
+Leveraged zero-knowledge proofs' characteristics: succintness and fairness
