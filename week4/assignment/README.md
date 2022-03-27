@@ -140,3 +140,36 @@ The two last important aspects I understood from Kimchi are:
 
 Here's a TL;DR provided by Mina:
 > Pickles now uses an upgraded proof system: Kimchi. Kimchi brings several optimizations and quality-of-life improvements to circuit builders. This should allow for faster provers, larger circuits, and potentially shorter proof sizes!
+
+
+## Question 4
+
+### Question 4.1: Describe 2-3 different projects
+
+1. Private inventory smart contract
+2. Signature compressor
+3. Cross-chain state verifier smart contract
+
+#### Private inventory smart contract for web3 MMOs
+
+Initial insight:
+
+Proposed solution:
+
+Leveraged zero-knowledge proofs' characteristics: 
+
+#### Signature compressor for fully on-chain DAOs
+
+Initial insight:
+
+Proposed solution:
+
+Leveraged zero-knowledge proofs' characteristics: 
+
+#### Cross-chain state verifier smart contract (bridge tooling for interchain light clients) 
+
+Initial insight:
+
+Proposed solution:
+
+Leveraged zero-knowledge proofs' characteristics: 
