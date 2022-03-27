@@ -125,3 +125,8 @@ Here's an example of what registers look like:
 Here is a broader architecture overview of the arithmetic circuits of Kimchi. Notable differences are: the existence of generic gates in Kimchi, that allow for both additions and multiplications and registers being split as IO registers (can be wired to the next one) + temporary registers.
 
 <img src="https://cdn-fagpn.nitrocdn.com/nvawPUgmLuenSpEkZxPTWilYhwRGNGyf/assets/static/optimized/rev-3239291/wp-content/uploads/24-2048x900.png">
+
+
+Having 15 registers allow for more inputs inside a gate. Therefore, this allows for hash function gates (Poseidon), elliptic curves operations gates, and much more. 
+
+<img src="https://cdn-fagpn.nitrocdn.com/nvawPUgmLuenSpEkZxPTWilYhwRGNGyf/assets/static/optimized/rev-3239291/wp-content/uploads/26-2048x1329.png">
