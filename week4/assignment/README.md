@@ -126,7 +126,9 @@ Here is a broader architecture overview of the arithmetic circuits of Kimchi. No
 
 <img src="https://cdn-fagpn.nitrocdn.com/nvawPUgmLuenSpEkZxPTWilYhwRGNGyf/assets/static/optimized/rev-3239291/wp-content/uploads/24-2048x900.png">
 
-
 Having 15 registers allow for more inputs inside a gate. Therefore, this allows for hash function gates (Poseidon), elliptic curves operations gates, and much more. 
 
 <img src="https://cdn-fagpn.nitrocdn.com/nvawPUgmLuenSpEkZxPTWilYhwRGNGyf/assets/static/optimized/rev-3239291/wp-content/uploads/26-2048x1329.png">
+
+Here's a TL;DR provided by Mina:
+> Pickles now uses an upgraded proof system: Kimchi. Kimchi brings several optimizations and quality-of-life improvements to circuit builders. This should allow for faster provers, larger circuits, and potentially shorter proof sizes!
