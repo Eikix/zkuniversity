@@ -130,5 +130,9 @@ Having 15 registers allow for more inputs inside a gate. Therefore, this allows 
 
 <img src="https://cdn-fagpn.nitrocdn.com/nvawPUgmLuenSpEkZxPTWilYhwRGNGyf/assets/static/optimized/rev-3239291/wp-content/uploads/26-2048x1329.png">
 
+The two last important aspects I understood from Kimchi are: 
+1. That gates can directly write their outputs to the registers of the next gate, this allows for faster iterative computation like that of Poseidon's.
+2. Lookup tables, they allow for large logic gates to be expressed as a table, and operations within it to be looked up. This makes operations way faster. The example Mina gives is that a XOR table over 4 bits elements is of size 2^8. Implementing it with generic gates would be tedious. 
+
 Here's a TL;DR provided by Mina:
 > Pickles now uses an upgraded proof system: Kimchi. Kimchi brings several optimizations and quality-of-life improvements to circuit builders. This should allow for faster provers, larger circuits, and potentially shorter proof sizes!
