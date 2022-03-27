@@ -111,9 +111,7 @@ Here's a scheme of the hierarchy of machinery used by Mina network. In the words
 
 > Pickles need something to create proofs though, and this is what Kimchi is. [...] Kimchi is a collection of improvements, optimizations, and alterations made on top of PLONK.
 
-<div style="display: flex; justify-content:center; flex-grow: 1;">
-  <img src="https://cdn-fagpn.nitrocdn.com/nvawPUgmLuenSpEkZxPTWilYhwRGNGyf/assets/static/optimized/rev-3239291/wp-content/uploads/5.png" style="max-width:30vw; margin: 0 auto;">
-</div>
+<img src="https://cdn-fagpn.nitrocdn.com/nvawPUgmLuenSpEkZxPTWilYhwRGNGyf/assets/static/optimized/rev-3239291/wp-content/uploads/5.png">
 
 Kimchi is aimed at improving [PLONK](https://eprint.iacr.org/2019/953.pdf). 
 
