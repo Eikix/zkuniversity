@@ -158,6 +158,8 @@ Proposed solution: A zkp inventory system in the form of a plug-in for EVM MMOs 
 
 Leveraged zero-knowledge proofs' characteristics: most primarily privacy, but also succintness (for smaller storage space on-chain).
 
+I think this idea could really be useful to help game enthusiasts and game devs leverage zkp for very simple usecases. It also leverages the hype around gamefi.
+
 #### Signature compressor for fully on-chain DAOs
 
 Initial insight: I'm thinking DAO with 200+ members that all need to sign on some proposal but that want to avoid running 200+ ecrecover on Ethereum while running everything on-chain (rather than off-chain on Snapshot).
@@ -171,6 +173,8 @@ high gas cost make on chain voting difficult
 I think it's not really a problem on Harmony or other L1/L2s.
 It's still a nice idea since it solves a concrete problem.
 
+As stated by my colleagues, this project's problem is that its only real usecase is on Ethereum L1 right now. But since many DAOs are based on EthL1, it might come in handy.
+
 #### Cross-chain state verifier smart contract (bridge tooling for interchain light clients) 
 
 Initial insight: Say you want to prove to some Fantom node that you gave 200 Ether to Bob on Ethereum L1 Chain, right now you have to rely on Relayer nodes that are trusted and sometimes centralized (e.g. Avalanche Bridge).
@@ -182,6 +186,7 @@ Leveraged zero-knowledge proofs' characteristics: succintness and fairness
 Comments from co-students: Wouldn't your service just replace the existing centralised service (e.g. bridge)? 
 It's a new type of bridge, so still interesting idea for a project! 
 
+I believe that while this idea can be very beneficial for bridges, it may prove very complicated to build from A to Z in this amount of time. Maybe it's too big of an endeavour.
 
 ## Question 5: Thinking in ZK
 
