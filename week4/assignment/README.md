@@ -166,6 +166,11 @@ Proposed solution: A service for any protocol that requires lots of aggregated s
 
 Leveraged zero-knowledge proofs' characteristics: succintness and fairness
 
+Comments from co-students: Your first idea solves a problem which only exists on Ethereum main net: 
+high gas cost make on chain voting difficult
+I think it's not really a problem on Harmony or other L1/L2s.
+It's still a nice idea since it solves a concrete problem.
+
 #### Cross-chain state verifier smart contract (bridge tooling for interchain light clients) 
 
 Initial insight: Say you want to prove to some Fantom node that you gave 200 Ether to Bob on Ethereum L1 Chain, right now you have to rely on Relayer nodes that are trusted and sometimes centralized (e.g. Avalanche Bridge).
@@ -173,6 +178,10 @@ Initial insight: Say you want to prove to some Fantom node that you gave 200 Eth
 Proposed solution: Make a zkp of the delta of some EVM chain state -> Bob's account: from X to X + 200 Ether and my account: from Y to Y-200 (+ await some blocks for finality). This allows for multi-chain light clients and trustless bridging.
 
 Leveraged zero-knowledge proofs' characteristics: succintness and fairness
+
+Comments from co-students: Wouldn't your service just replace the existing centralised service (e.g. bridge)? 
+It's a new type of bridge, so still interesting idea for a project! 
+
 
 ## Question 5: Thinking in ZK
 
