@@ -97,3 +97,5 @@ I believe that the differentiating factor is that mixers are meant to shield mon
 Even on-chain board games can now be played through this system, as player can secretly own any type of asset (NFTs are just digital properties in the end), and then decide to reveal their proof of ownership.
 
 Although this idea is neither new nor very advanced, good might come out of it as people will build on top of it or challenge me through iterative PRs or productive criticism.
+
+Thank you for your time, and I'd love your feedback and help on this idea:).
