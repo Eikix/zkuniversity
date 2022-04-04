@@ -53,3 +53,47 @@ So I'm guessing UTXO works in the following way for VAnchor: any unspent amount 
 Hey Aztec people! I'd like to ask you how you handle the risk of forking (when bridging from Ethereum to any L1)? Must you still await 5 to 6mins for finality? Thanks a lot.
 
 ## Question 5: Final project
+
+I've decided to build the following project: a private inventory dApp for web3 MMOs.
+
+### Overview
+
+The point of this project is to provide an easy standard to extend from for web3 game developers. The insight is that right now, any MMO or RPG based on a blockchain that incorporates items for its players has to be settle for public inventory. All transactions are public on general purpose blockchains and ownership of items is also public.
+
+If items in a game are ERC721 or equivalents on blockchains, then it's easy to reconstruct what every player possesses at any given moment. This defeats the feeling that players have the right and the freedom to reveal their most valuables treasures as well as hide them from others.
+
+This is where private inventories come into play. There is a need for gamefi to offer privacy and fairness to players. This
+
+#### How?
+
+So far, my lead is that I'd like to extend the ERC721 standard to allow shielded ownership. This would work in the following way:
+
+- The set of all items in a game is contained in a smart contract that resembles ERC721 standard.
+
+- Each item (NFT) stores its owner's address in the form of a salted hash.
+
+- Each owner knows an item is theirs because they know the pre-image of that hash. They know their address (public key) and they know the secret string that was used to salt their public key.
+
+- At any milestone (crucial) moment in the life of the item - i.e. sell, transfer, destroy or just reveal that you own the item - players can choose to reveal their ownership and perform an action with a zero-knowledge proof. The verifier of the zero-knowledge proof checks that the player knows the pre-image of the hash stored on-chain: `POSEIDON(player_public_key, secret_string)`. The player now can prove that they own the item without actually revealing the secret.
+
+- When players sell or transfer the item, they actually erase their hash from the ownership mapping and the item becomes available again. Either for some chosen player (transfer) or for a price (sell). The next person to possess the item will be responsible for chosing a secret string to hash their public key with and then store it on chain when they take ownership of the item.
+
+- The smart contract will perform transfer of ownership per rounds (so as to shield identity of buyers and new owners). At each "tick" (for instance each day, or after there is 20 transfers), the smart contract will attribute the items to their new owner by storing their identity commitment.
+
+### Use cases
+
+Any MMORPG, RPG, strategy on-chain game with items might want to include this smart contract and UI in their set of smart contracts. This would greatly improve player experience as well as possibility for shenanigans!
+
+This could also be extended for other use cases: private art NFTs, private and shielded property (medical insurance, real estate, etc.)
+
+### Competing products
+
+I believe the idea of secretly owned NFTs is not new. Mixers achieve this functionality pretty well already.
+
+### Differentiating characteristics
+
+I believe that the differentiating factor is that mixers are meant to shield money transfers whereas here, the ownership of a digital item is shielded, but can be revealed. The idea that a player can own an item and choose to reveal it or not frees so many possibilities!
+
+Even on-chain board games can now be played through this system, as player can secretly own any type of asset (NFTs are just digital properties in the end), and then decide to reveal their proof of ownership.
+
+Although this idea is neither new nor very advanced, good might come out of it as people will build on top of it or challenge me through iterative PRs or productive criticism.
