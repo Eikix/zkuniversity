@@ -55,4 +55,12 @@ An SDK made to build modular blockchains: kind of like Polkadot's substrate, Cos
 
 Oh damn! What have I learnt? It's not an easy question but it's a good time to settle down and look back:)!
 
+- Through studying zero-knowledge proofs, I have learnt about the basics of cryptography: elliptic curves, different hash algorithms as well as hardware description languages. I learnt how to build a circuit and how to implement it.
+
+- I also understood better the ins-and-out of SNARKs (trusted setup, power of tau, common random string, etc.), STARKs (transparency, proof size...) and other zero-knowledge mechanisms (FRI, etc.).
+
+- On top of scalability and security, I discovered new essential challenges for blockchain, namely: the data availability issue, privacy necessity, fairness and anti-collusion protection.
+
+- I also witnessed the power of open source, cooperation and kindness;)!
+
 ## Question 5: Update on final project (Stream B)
