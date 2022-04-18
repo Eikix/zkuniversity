@@ -64,3 +64,21 @@ Oh damn! What have I learnt? It's not an easy question but it's a good time to s
 - I also witnessed the power of open source, cooperation and kindness;)!
 
 ## Question 5: Update on final project (Stream B)
+
+After speaking lovelace on discord, I found out my first idea was a bit too niche. The first idea was to provide users with a shielded identity NFT.
+
+The new idea I submitted to the TAs group is an aggregated signature verifier. The aim is to provide bridges and DAOs on EVMs (or VMs that use ECDSA) the ability to sign messages and verify the signatures off-chain.
+
+The idea is the following:
+
+- In some given scenario, a certain number of users sign on a message using their private key. This results in a message being passed around as well as a bunch of signatures for that message.
+- This would typically mean that some smart contract would have to loop through all these signatures and run ecrecover on that particular message and then verify recovered public addresses against a list.
+- This is very costly in gas on Ethereum.
+
+As an alternative, I offer an in-browser solution (or directly as a package) for verifying a high number of signatures for a given message. The zkp is then processed on-chain for a fixed size.
+
+The ECDSA recovering method is implemented using this [repository](https://github.com/0xPARC/circom-ecdsa). This repository would allow me to use a circuit called `verify`. This circuit allows a programmer to provide: `r, s, msghash and pubKey` and runs an ECDSA signature verification on it.
+
+The only remaining challenge would be to implement some kind of for loop for this signature verification inside the circom circuit.
+
+I'll test that as soon as possible.
