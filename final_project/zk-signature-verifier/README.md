@@ -53,6 +53,13 @@ We are operating on Harmony, so consider an EVM environment. The signature schem
 [signature1, signature2, ..., signature50]
 ```
 
-- The payload object, the signatures along with the set of "whitelisted" public addresses (the members of the DAO, those authorised to vote) are sent to the zkSignature verifier circom circuit. The circuit verifies that the each signature is part of the list of accepted addresses. If all of the signatures are accepted (or a subset), then the circuit will output a valid proof of correct & truthful voting!
+- The payload object, the signatures, the desired threshold, as well as a unique identifier for this vote are sent to the zkSignature verifier circom circuit as private inputs. At each step, the circuit verifies (recovers) each EDDSA signature and thus outputs a public key. This is where the smart part happens! I have [@icodeblockchain](https://twitter.com/icodeblockchain) to thank for it. The circuit will aggregate the recovered public keys. It will:
 
-- The last step is therefore to send this newly created proof on-chain to be read by our smart contract! The smart contract will need the set of authorised public addresses as parameters for the `verify` function, as it is the public input of the circuit.
+  - hash them! This will be fed to the verifier smart contract to check against the actual hashed set of public keys of the authorised signers.
+  - check that the number of signers exceeds the threshold.
+    Note that the smart contract will have to verify that the threshold is met and that the outputed hash of the public keys matches the one it has knowledge of (it's simple for the smart contract to just hash public keys of the authorised signers in a vacuum).
+
+- The last step is therefore to send on-chain this newly created proof to be read by our smart contract! The smart contract will:
+  - need the hash of the set of authorised public addresses as parameters for the `verify` function. (on-chain verification of signers)
+  - to check if the unique identifier of the payload has already been processed (no reetrancy)
+  - that the treshold is met! (desired majority)
