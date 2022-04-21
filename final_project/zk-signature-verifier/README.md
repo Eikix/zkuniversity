@@ -53,11 +53,11 @@ We are operating on Harmony, so consider an EVM environment. The signature schem
 [signature1, signature2, ..., signature50]
 ```
 
-- The payload object, the signatures, the desired threshold, as well as a unique identifier for this vote are sent to the zkSignature verifier circom circuit as private inputs. At each step, the circuit verifies (recovers) each EDDSA signature and thus outputs a public key. This is where the smart part happens! I have [@icodeblockchain](https://twitter.com/icodeblockchain) to thank for it. The circuit will aggregate the recovered public keys. It will:
+- The payload object, the signatures array, as well as the desired threshold are sent to the zkSignature verifier circom circuit as private inputs. At each step, the circuit verifies (recovers) each EDDSA signature and thus outputs a public key. This is where the smart part happens! I have [@icodeblockchain](https://twitter.com/icodeblockchain) to thank for it. The circuit will aggregate the recovered public keys. The circuit will:
 
-  - hash them! This will be fed to the verifier smart contract to check against the actual hashed set of public keys of the authorised signers.
+  - hash the set of recovered public keys! This will be used at parameters by the verifier smart contract to check against the "true" hashed set of public keys of the authorised signers.
   - check that the number of signers exceeds the threshold.
-    Note that the smart contract will have to verify that the threshold is met and that the outputed hash of the public keys matches the one it has knowledge of (it's simple for the smart contract to just hash public keys of the authorised signers in a vacuum).
+    Note that the smart contract MUST to verify that the threshold is met AND that the outputed hash of the public keys matches the one it has knowledge of (it's simple for the smart contract to "persist" knowledge of a hash of public keys for whitelisted signers).
 
 - The last step is therefore to send on-chain this newly created proof to be read by our smart contract! The smart contract will:
   - need the hash of the set of authorised public addresses as parameters for the `verify` function. (on-chain verification of signers)
