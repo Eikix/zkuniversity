@@ -59,7 +59,7 @@ We are operating on Harmony, so consider an EVM environment. The signature schem
   - check that the number of signers exceeds the threshold.
     Note that the smart contract MUST to verify that the threshold is met AND that the outputed hash of the public keys matches the one it has knowledge of (it's simple for the smart contract to "persist" knowledge of a hash of public keys for whitelisted signers).
 
-- The last step is therefore to send on-chain this newly created proof to be read by our smart contract! The smart contract will:
+- The last step is therefore to send on-chain this newly created SNARK proof to be read by our smart contract! The smart contract will:
   - need the hash of the set of authorised public addresses as parameters for the `verify` function. (on-chain verification of signers)
   - to check if the unique identifier of the payload has already been processed (no reetrancy)
   - that the treshold is met! (desired majority)
