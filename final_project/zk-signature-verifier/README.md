@@ -47,15 +47,15 @@ We are operating on Harmony, so consider an EVM environment. The signature schem
 
 ```
 
-- Users can sign online and off-chain the proposal. These signatures are aggregated inside an array.
+- Users can sign off-chain the proposal using their private keys. These signatures are aggregated inside an array.
 
 ```
 [signature1, signature2, ..., signature50]
 ```
 
-- The payload object, the signatures array, as well as the desired threshold are sent to the zkSignature verifier circom circuit as private inputs. At each step, the circuit verifies (recovers) each EDDSA signature and thus outputs a public key. This is where the smart part happens! I have [@icodeblockchain](https://twitter.com/icodeblockchain) to thank for it. The circuit will aggregate the recovered public keys. The circuit will:
+- The payload object, the complete set of signers of the DAO, the array of signatures (if some signers didn't sign the message, replace their sigs by 0s so that the array of signatures and the array of all the allowed signers are the same length and ordered) as well as the desired threshold are sent to the zkSignature verifier circom circuit as private inputs. At each step, the circuit verifies each EDDSA signature. This is where the smart part happens! I have [@icodeblockchain](https://twitter.com/icodeblockchain) to thank for it. The circuit will:
 
-  - hash the set of recovered public keys! This will be used at parameters by the verifier smart contract to check against the "true" hashed set of public keys of the authorised signers.
+  - hash the set of all authorized public keys! This will be used as parameters by the verifier smart contract to check against the "true" hashed set of public keys of the authorised signers. This is done to check that the circuit has verified the correct set of signers.
   - check that the number of signers exceeds the threshold.
     Note that the smart contract MUST to verify that the threshold is met AND that the outputed hash of the public keys matches the one it has knowledge of (it's simple for the smart contract to "persist" knowledge of a hash of public keys for whitelisted signers).
 
