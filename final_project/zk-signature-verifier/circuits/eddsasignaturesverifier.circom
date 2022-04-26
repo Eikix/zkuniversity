@@ -1,7 +1,7 @@
 pragma circom 2.0.0;
-include "../circomlib/circuits/eddsaposeidon.circom";
-include "../circomlib/circuits/poseidon.circom";
-include "../circomlib/circuits/comparators.circom";
+include "./circomlib/circuits/eddsaposeidon.circom";
+include "./circomlib/circuits/poseidon.circom";
+include "./circomlib/circuits/comparators.circom";
 
 template EdDSASignaturesVerifier(nInputs) {
     signal input signatureThreshold;
