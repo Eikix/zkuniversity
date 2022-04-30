@@ -37,6 +37,11 @@ async function createInput() {
       inputJson.R8x[i] = BigNumber.from(signature.R8[0]).toString();
       inputJson.R8y[i] = BigNumber.from(signature.R8[1]).toString();
       inputJson.isEnabled[i] = "1";
+      if (!eddsa.verifyPoseidon(message, signature, pubKey)) {
+        throw new Error(
+          "Signature can't be verified by circomlibjs PoseidonVerify"
+        );
+      }
     }
 
     Object.values(inputJson).forEach((value) => {

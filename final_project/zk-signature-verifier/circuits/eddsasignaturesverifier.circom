@@ -43,13 +43,13 @@ template EdDSASignaturesVerifier(nInputs) {
         verifiers[sig_idx].R8y <== R8y[sig_idx];
         verifiers[sig_idx].M <== message;
 
-        validSignatures += 1;
+        validSignatures++;
         // Storing the pubkeys' hash one by one and for it to be outputed to the smart contract to check for consistency and coherence.
         poseidonHashedPubkeys.inputs[sig_idx] <== Ax[sig_idx];
     }
 
     hashedPubkeys <== poseidonHashedPubkeys.out;
-    component greaterEqThan = GreaterEqThan(32);
+    component greaterEqThan = GreaterEqThan(252);
     greaterEqThan.in[0] <== validSignatures;
     greaterEqThan.in[1] <== signatureThreshold;
     validThreshold <== greaterEqThan.out;
