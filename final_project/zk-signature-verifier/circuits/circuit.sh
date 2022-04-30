@@ -12,7 +12,7 @@
 # --c:
 ## Generates the directory [name]_cpp. Contains the equivalent of the wasm directory used to generate the witness of the circuit.
 
-circom ./circuits/eddsasignaturesverifier.circom --r1cs --wasm --sym --c
+circom ./eddsasignaturesverifier.circom --r1cs --wasm --sym --c
 
 
 ### Then, we need to generate a witness: a set of signals that satisfy the circuit. We'll need an inputs JSON file that contains all the circuit's inputs.

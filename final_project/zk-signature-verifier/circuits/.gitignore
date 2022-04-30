@@ -1,0 +1,6 @@
+node_modules/
+eddsasignaturesverifier_js/
+eddsasignaturesverifier_cpp/
+/node_modules
+/eddsasignaturesverifier_cpp
+/eddsasignaturesverifier_js
