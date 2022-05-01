@@ -33,7 +33,7 @@ template EdDSASignaturesVerifier(nInputs) {
         // If equal to 1, verifier.enabled will try to recover the signature. If 0, sig verification will be skipped.
         // This enables the circuit to skip signers who did not sign.
         // Checking that isEnabled[sig_idx] is either 0 or 1.
-        isEnabled[sig_idx]*(1-isEnabled[sig_idx]) === 0;
+        assert(isEnabled[sig_idx]*(1-isEnabled[sig_idx]) == 0);
         verifiers[sig_idx].enabled <== isEnabled[sig_idx];
 
         verifiers[sig_idx].Ax <== Ax[sig_idx];
