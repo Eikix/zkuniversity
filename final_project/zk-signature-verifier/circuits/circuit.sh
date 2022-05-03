@@ -31,15 +31,15 @@ node eddsasignaturesverifier_js/generate_witness.js eddsasignaturesverifier_js/e
 
 # Phase 1 of the trusted setup generation is called the powers of tau. It is independent of the circuit itself. Note that one should choose a power of tau high enough to run phase 2, otherwise will get an error of the from "X > 2^n".
 
-snarkjs powersoftau new bn128 14 pot14_0000.ptau -v
+snarkjs powersoftau new bn128 17 pot17_0000.ptau -v
 
-snarkjs powersoftau contribute pot14_0000.ptau pot14_0001.ptau --name="First contribution" -v
+snarkjs powersoftau contribute pot17_0000.ptau pot17_0001.ptau --name="First contribution" -v
 
 # Phase 2 is circuit-specific and is used to generate a .zkey file. This file contains proving and verification keys.
 
-snarkjs powersoftau prepare phase2 pot14_0001.ptau pot14_final.ptau -v
+snarkjs powersoftau prepare phase2 pot17_0001.ptau pot17_final.ptau -v
 
-snarkjs groth16 setup eddsasignaturesverifier.r1cs pot14_final.ptau eddsasignaturesverifier_0000.zkey
+snarkjs groth16 setup eddsasignaturesverifier.r1cs pot17_final.ptau eddsasignaturesverifier_0000.zkey
 
 snarkjs zkey contribute eddsasignaturesverifier_0000.zkey eddsasignaturesverifier_0001.zkey --name="1st Contributor Name" -v
 

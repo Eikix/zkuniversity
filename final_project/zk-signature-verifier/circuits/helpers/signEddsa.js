@@ -1,4 +1,4 @@
-const { buildEddsa } = require("circomlibjs");
+const { buildEddsa, buildBabyjub } = require("circomlibjs");
 const { BigNumber } = require("ethers");
 const { arrayify } = require("ethers").utils;
 const fs = require("fs");
@@ -18,26 +18,27 @@ async function createInput() {
   };
   try {
     const eddsa = await buildEddsa();
+    const babyJub = await buildBabyjub();
+    const { F } = babyJub;
 
-    const msg =
-      "56645627244818247611747275857905819486225339157975649303747177225593271309321";
+    const msg = F.e(1234);
     // Adding the message to the input.json file (inputJson object)
-    inputJson.message = msg;
+    inputJson.message = F.toObject(msg).toString();
 
     for (let i = 0; i < CIRCUIT_MAX_INPUTS; i++) {
       const prvKey = crypto.randomBytes(32);
       const pubKey = eddsa.prv2pub(prvKey);
 
       // Adding the public key to the input object
-      inputJson.Ax[i] = BigNumber.from(pubKey[0]).toString();
-      inputJson.Ay[i] = BigNumber.from(pubKey[1]).toString();
-      const message = arrayify(BigNumber.from(msg));
-      const signature = eddsa.signPoseidon(prvKey, message);
+      inputJson.Ax[i] = F.toObject(pubKey[0]).toString();
+      inputJson.Ay[i] = F.toObject(pubKey[1]).toString();
+      const signature = eddsa.signPoseidon(prvKey, msg);
       inputJson.S[i] = signature.S.toString();
-      inputJson.R8x[i] = BigNumber.from(signature.R8[0]).toString();
-      inputJson.R8y[i] = BigNumber.from(signature.R8[1]).toString();
-      inputJson.isEnabled[i] = "1";
-      if (!eddsa.verifyPoseidon(message, signature, pubKey)) {
+      inputJson.R8x[i] = F.toObject(signature.R8[0]).toString();
+      inputJson.R8y[i] = F.toObject(signature.R8[1]).toString();
+      inputJson.isEnabled[i] = 1;
+      console.log(inputJson.R8y[i]);
+      if (!eddsa.verifyPoseidon(msg, signature, pubKey)) {
         throw new Error(
           "Signature can't be verified by circomlibjs PoseidonVerify"
         );
