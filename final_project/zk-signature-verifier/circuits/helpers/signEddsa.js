@@ -1,11 +1,11 @@
 const { buildEddsa, buildBabyjub } = require("circomlibjs");
-const { BigNumber } = require("ethers");
-const { arrayify } = require("ethers").utils;
 const fs = require("fs");
 const crypto = require("crypto");
 const CIRCUIT_MAX_INPUTS = 15;
 
 async function createInput() {
+  const privateKeys = { keys: [] };
+
   const inputJson = {
     signatureThreshold: Math.floor(CIRCUIT_MAX_INPUTS / 2).toString(),
     Ax: new Array(CIRCUIT_MAX_INPUTS),
@@ -27,6 +27,7 @@ async function createInput() {
 
     for (let i = 0; i < CIRCUIT_MAX_INPUTS; i++) {
       const prvKey = crypto.randomBytes(32);
+      privateKeys.keys.push(prvKey.toString("hex"));
       const pubKey = eddsa.prv2pub(prvKey);
 
       // Adding the public key to the input object
@@ -37,7 +38,6 @@ async function createInput() {
       inputJson.R8x[i] = F.toObject(signature.R8[0]).toString();
       inputJson.R8y[i] = F.toObject(signature.R8[1]).toString();
       inputJson.isEnabled[i] = 1;
-      console.log(inputJson.R8y[i]);
       if (!eddsa.verifyPoseidon(msg, signature, pubKey)) {
         throw new Error(
           "Signature can't be verified by circomlibjs PoseidonVerify"
@@ -54,6 +54,7 @@ async function createInput() {
     });
     fs.writeFileSync("input.json", JSON.stringify(inputJson, null, 2));
     fs.writeFileSync("helpers/input.json", JSON.stringify(inputJson, null, 2));
+    fs.writeFileSync("privateKeys.json", JSON.stringify(privateKeys, null, 2));
   } catch (e) {
     console.error(e);
   }
