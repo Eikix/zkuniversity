@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { privateKeys } from '../utils/privateKeys'
+import SignaturesVerifier from '../components/SignaturesVerifier'
 
 const Home: NextPage = () => {
   return (
@@ -11,15 +11,23 @@ const Home: NextPage = () => {
       </Head>
 
       <main className="flex w-full flex-1 flex-col items-center justify-center gap-2 px-20 text-center">
-        <div className="rounded-lg border bg-blue-50 p-6 text-gray-800">
-          <h1 className="text-3xl font-bold text-blue-900">
-            Welcome to zk-Signature Verifier
-          </h1>
-          <p className="mt-3 max-w-md text-2xl lg:max-w-xl">
-            Get started by signing on a message. For this toy app, you own the
-            15 private keys that control the DAO's funds!
-          </p>
+        <div className="rounded-lg border bg-blue-50 p-6 text-gray-700">
+          <details>
+            <summary className="text-3xl font-bold text-blue-900">
+              Welcome to zk-Signature Verifier
+            </summary>
+            <p className="mt-3 max-w-md text-2xl lg:max-w-xl">
+              Get started by signing on a message. For this toy app, you own the
+              15 private keys that control the DAO's funds!
+            </p>
+            <p className="mt-3 max-w-md text-2xl lg:max-w-xl">
+              You'll be able to fund a dummy non-profit by signing off-chain on
+              a specific message (containing an address, a signature threshold,
+              and a nonce).
+            </p>
+          </details>
         </div>
+        <SignaturesVerifier />
       </main>
 
       <footer className="flex h-24 w-full flex-1 items-center justify-center gap-3 border-t">
