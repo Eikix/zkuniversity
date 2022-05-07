@@ -5,8 +5,8 @@ import { privateKeys } from '../utils/privateKeys'
 const { buildPoseidon } = require('circomlibjs')
 import { exportCallDataGroth16 } from '../utils/zkProof/zkProof'
 
-const CIRCUIT_WASM_PATH = '../circuits/eddsasignaturesverifier.wasm'
-const ZKEY_PATH = '../circuits/eddsasignaturesverifier_0001.zkey'
+const RELATIVE_CIRCUIT_WASM_PATH = '/circuits/eddsasignaturesverifier.wasm'
+const RELATIVE_ZKEY_PATH = '/circuits/eddsasignaturesverifier_0001.zkey'
 
 const CIRCUIT_MAX_INPUTS = 15
 
@@ -56,8 +56,8 @@ const SignaturesVerifier: NextPage = () => {
   const prepareSmartContractCall = async (input: any) => {
     const [a, b, c, Input] = await exportCallDataGroth16(
       input,
-      CIRCUIT_WASM_PATH,
-      ZKEY_PATH
+      RELATIVE_CIRCUIT_WASM_PATH,
+      RELATIVE_ZKEY_PATH
     )
     setInput([a, b, c, Input])
     return [a, b, c, Input]
@@ -65,7 +65,9 @@ const SignaturesVerifier: NextPage = () => {
 
   const callSmartContract = async (input: any) => {
     // for now this is fake, just a proof verifier in browser.
-    console.log(await prepareSmartContractCall(input))
+    const call = await prepareSmartContractCall(input)
+    console.log(JSON.stringify(call))
+    navigator.clipboard.writeText(JSON.stringify(call))
   }
 
   return (
