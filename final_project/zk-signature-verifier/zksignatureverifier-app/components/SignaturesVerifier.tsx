@@ -65,6 +65,7 @@ const SignaturesVerifier: NextPage = () => {
 
   const callSmartContract = async (input: any) => {
     // for now this is fake, just a proof verifier in browser.
+    // can be verified in remix
     const call = await prepareSmartContractCall(input)
     console.log(JSON.stringify(call))
     navigator.clipboard.writeText(JSON.stringify(call))
