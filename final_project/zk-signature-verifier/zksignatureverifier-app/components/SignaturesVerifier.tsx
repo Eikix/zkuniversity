@@ -1,4 +1,3 @@
-import { NextPage } from 'next'
 import { useState } from 'react'
 import { createInput } from '../utils/createInput'
 import { privateKeys } from '../utils/privateKeys'
@@ -22,9 +21,9 @@ const INITIAL_MESSAGE: Message = {
   signatureThreshold: Math.floor(CIRCUIT_MAX_INPUTS / 2).toString(),
 }
 
-const SignaturesVerifier: NextPage = () => {
+const SignaturesVerifier = (props: any): JSX.Element => {
   const [message, setMessage] = useState(INITIAL_MESSAGE)
-  const [input, setInput] = useState<any[][] | null>(null)
+  const [input, setInput] = useState<Array<any[]> | null>(null)
 
   const handleMessageChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -43,7 +42,7 @@ const SignaturesVerifier: NextPage = () => {
     console.log(messageHash)
     const input = await createInput(privateKeys, messageHash)
     console.log(input)
-    await callSmartContract(input)
+    await setInputParameters(input)
     return input
   }
 
@@ -63,16 +62,15 @@ const SignaturesVerifier: NextPage = () => {
     return [a, b, c, Input]
   }
 
-  const callSmartContract = async (input: any) => {
+  const setInputParameters = async (input: any) => {
     // for now this is fake, just a proof verifier in browser.
     // can be verified in remix
     const call = await prepareSmartContractCall(input)
     console.log(JSON.stringify(call))
-    navigator.clipboard.writeText(JSON.stringify(call))
   }
 
   return (
-    <div className="flex flex-col rounded-lg bg-slate-50 p-4">
+    <div className="flex flex-col gap-6 rounded-lg bg-slate-50 p-4">
       <form className="flex flex-col items-start  gap-4" onSubmit={onSubmit}>
         <div className="flex w-full flex-col items-center gap-6 lg:flex-row lg:justify-between">
           <label htmlFor="address">Enter an EVM-compatible address:</label>
@@ -93,7 +91,6 @@ const SignaturesVerifier: NextPage = () => {
             type="text"
             name="nonce"
             id="nonce"
-            disabled
             value={message.nonce}
             onChange={(event) => handleMessageChange(event, 'nonce')}
           />
@@ -121,6 +118,15 @@ const SignaturesVerifier: NextPage = () => {
           Sign
         </button>
       </form>
+      <button
+        className="self-center rounded-lg bg-blue-900 px-4 py-2 text-slate-100"
+        onClick={() => {
+          if (!Array.isArray(input)) throw 'Input is not an array'
+          props.callSmartContract([message.address, ...input])
+        }}
+      >
+        Submit to the blockchain
+      </button>
     </div>
   )
 }

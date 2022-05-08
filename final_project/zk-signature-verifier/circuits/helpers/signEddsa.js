@@ -2,9 +2,10 @@ const { buildEddsa, buildBabyjub } = require("circomlibjs");
 const fs = require("fs");
 const crypto = require("crypto");
 const CIRCUIT_MAX_INPUTS = 15;
+const privateKeys = require("../privateKeys.json");
 
 async function createInput() {
-  const privateKeys = { keys: [] };
+  // const privateKeys = { keys: [] };
 
   const inputJson = {
     signatureThreshold: Math.floor(CIRCUIT_MAX_INPUTS / 2).toString(),
@@ -26,14 +27,12 @@ async function createInput() {
     inputJson.message = F.toObject(msg).toString();
 
     for (let i = 0; i < CIRCUIT_MAX_INPUTS; i++) {
-      const prvKey = crypto.randomBytes(32);
-      privateKeys.keys.push(prvKey.toString("hex"));
-      const pubKey = eddsa.prv2pub(prvKey);
+      const pubKey = eddsa.prv2pub(privateKeys.keys[i]);
 
       // Adding the public key to the input object
       inputJson.Ax[i] = F.toObject(pubKey[0]).toString();
       inputJson.Ay[i] = F.toObject(pubKey[1]).toString();
-      const signature = eddsa.signPoseidon(prvKey, msg);
+      const signature = eddsa.signPoseidon(privateKeys.keys[i], msg);
       inputJson.S[i] = signature.S.toString();
       inputJson.R8x[i] = F.toObject(signature.R8[0]).toString();
       inputJson.R8y[i] = F.toObject(signature.R8[1]).toString();
@@ -54,7 +53,7 @@ async function createInput() {
     });
     fs.writeFileSync("input.json", JSON.stringify(inputJson, null, 2));
     fs.writeFileSync("helpers/input.json", JSON.stringify(inputJson, null, 2));
-    fs.writeFileSync("privateKeys.json", JSON.stringify(privateKeys, null, 2));
+    // fs.writeFileSync("privateKeys.json", JSON.stringify(privateKeys, null, 2));
   } catch (e) {
     console.error(e);
   }

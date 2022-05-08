@@ -1,10 +1,41 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import SignaturesVerifier from '../components/SignaturesVerifier'
-import { useEthers } from '@usedapp/core'
+import { useContractFunction, useEthers } from '@usedapp/core'
+import { HarmonyOneTestShards } from '../utils/chains'
+import { utils } from 'ethers'
+import { Contract } from '@ethersproject/contracts'
+import oneCharityAbi from '../public/contracts/OneCharity.json'
+
+const oneCharityInterface = new utils.Interface(oneCharityAbi)
+const oneCharityTestnetAddress = '0xcae24a4742B9357AAd0E3504272877F22FFE2AE2'
+const contract = new Contract(oneCharityTestnetAddress, oneCharityInterface)
 
 const Home: NextPage = () => {
-  const { activateBrowserWallet, account, deactivate } = useEthers()
+  const { activateBrowserWallet, account, deactivate, switchNetwork, chainId } =
+    useEthers()
+
+  const { state, send } = useContractFunction(contract, 'fundNonProfit')
+
+  const fundNonProfit = (
+    address: string,
+    a: string[],
+    b: string[][],
+    c: string[],
+    input: string[]
+  ) => {
+    send(address, a, b, c, input)
+  }
+
+  const checkCorrectChainId = () => {
+    if (chainId !== HarmonyOneTestShards[0].chainId) {
+      switchNetwork(HarmonyOneTestShards[0].chainId)
+    }
+  }
+
+  const callSmartContract = (input: any[]) => {
+    fundNonProfit(input[0], input[1], input[2], input[3], input[4])
+  }
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
@@ -17,7 +48,10 @@ const Home: NextPage = () => {
         {!account ? (
           <button
             className="self-end rounded-lg bg-blue-900 px-4 py-2 text-slate-50"
-            onClick={() => activateBrowserWallet()}
+            onClick={() => {
+              activateBrowserWallet()
+              checkCorrectChainId()
+            }}
           >
             Connect your wallet
           </button>
@@ -46,7 +80,8 @@ const Home: NextPage = () => {
             </p>
           </details>
         </div>
-        <SignaturesVerifier />
+        <SignaturesVerifier callSmartContract={callSmartContract} />
+        <div>State of your call to the contract: {JSON.stringify(state)}</div>
       </main>
 
       <footer className="flex h-24 w-full flex-1 items-center justify-center gap-3 border-t">

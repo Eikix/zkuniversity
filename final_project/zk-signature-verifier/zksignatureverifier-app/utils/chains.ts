@@ -1,6 +1,12 @@
-import { Chain } from '@usedapp/core'
+interface Chain {
+  chainId: number
+  chainName: string
+  isTestChain: boolean
+  isLocalChain: boolean
+  rpcUrl: string
+}
 
-export const HarmonyOneTestShards: Partial<Chain>[] = [
+export const HarmonyOneTestShards: Chain[] = [
   {
     chainId: 1666700000,
     chainName: 'Testnet Shard 0',
