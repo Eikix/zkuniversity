@@ -63,3 +63,7 @@ We are operating on Harmony, so consider an EVM environment. The signature schem
   - need the hash of the set of authorised public addresses as parameters for the `verify` function. (on-chain verification of signers)
   - to check if the unique identifier of the payload has already been processed (no reetrancy)
   - that the treshold is met! (desired majority)
+
+
+Additional ressources:
+- [Demo video link](https://www.youtube.com/watch?v=cvpqKmtE83o)
