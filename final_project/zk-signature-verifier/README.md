@@ -67,3 +67,4 @@ We are operating on Harmony, so consider an EVM environment. The signature schem
 
 Additional ressources:
 - [Demo video link](https://www.youtube.com/watch?v=cvpqKmtE83o)
+- [Toy webapp](https://zkuniversity-eikix.vercel.app/)
